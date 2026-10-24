@@ -1,0 +1,338 @@
+.shell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: #111111;
+}
+
+.simplePanel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #fff8f8 100%);
+    box-shadow: 0 12px 28px rgba(176, 0, 32, 0.08);
+    padding: 1rem;
+}
+
+.threadPanel {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.4fr);
+    gap: 1rem;
+}
+
+.threadList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.threadItem {
+    width: 100%;
+    border: 1px solid #ead7da;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0.75rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+.threadItem:hover {
+    border-color: #b11226;
+    background: #fff7f8;
+}
+
+.threadItemActive {
+    border-color: #b11226;
+    box-shadow: 0 0 0 3px rgba(177, 18, 38, 0.12);
+    background: #fff4f5;
+}
+
+.threadHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.55rem;
+}
+
+.threadTitle {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #111111;
+}
+
+.threadMeta {
+    margin-top: 0.15rem;
+    color: #625858;
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+.threadBadge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.18rem 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.threadBadgeUnread {
+    background: #fee2e2;
+    color: #b11226;
+}
+
+.threadBadgeRead {
+    background: #f1f1f1;
+    color: #333333;
+}
+
+.threadPreview {
+    margin-top: 0.45rem;
+    color: #111111;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.threadWorkspace {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(220px, 0.8fr);
+    gap: 0.75rem;
+    align-items: end;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+}
+
+.field span {
+    color: #2c2c2c;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.composerActions {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.attachmentField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: min(360px, 100%);
+    flex: 1 1 320px;
+}
+
+.attachmentField span {
+    color: #2c2c2c;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.select,
+.fileInput,
+.textarea {
+    width: 100%;
+    border: 1px solid #d9b8bf;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #111111;
+    font: inherit;
+    font-size: 0.9rem;
+}
+
+.select,
+.fileInput {
+    min-height: 42px;
+    padding: 0.55rem 0.65rem;
+}
+
+.textarea {
+    min-height: 96px;
+    resize: vertical;
+    padding: 0.75rem;
+}
+
+.select:focus,
+.fileInput:focus,
+.textarea:focus {
+    outline: 0;
+    border-color: #b11226;
+    box-shadow: 0 0 0 3px rgba(177, 18, 38, 0.12);
+}
+
+.messages {
+    min-height: 260px;
+    max-height: 440px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border: 1px solid #e2c9ce;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #fffefe 0%, #fff6f7 100%);
+    padding: 1rem;
+}
+
+.conversationTitle {
+    margin-bottom: 0;
+    color: #1f1f1f;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+.messageStack {
+    display: flex;
+    max-width: min(680px, 76%);
+}
+
+.messageStackIncoming {
+    align-self: flex-start;
+}
+
+.messageStackOutgoing {
+    align-self: flex-end;
+}
+
+.messageBubble {
+    border-radius: 8px;
+    padding: 0.75rem 0.85rem;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+.messageBubbleIncoming {
+    background: #ffffff;
+    border: 1px solid #e0d0d3;
+}
+
+.messageBubbleOutgoing {
+    background: #b11226;
+    border: 1px solid #8f1121;
+    color: #ffffff;
+}
+
+.messageBody {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+    font-size: 0.92rem;
+}
+
+.messageTime {
+    margin-top: 0.25rem;
+    color: #7a7070;
+    font-size: 0.72rem;
+    text-align: right;
+}
+
+.messageBubbleOutgoing .messageTime {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.attachmentLink {
+    display: inline-flex;
+    margin-top: 0.45rem;
+    color: #8f1121;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.messageBubbleOutgoing .attachmentLink {
+    color: #ffffff;
+}
+
+.attachmentLink:hover {
+    text-decoration: underline;
+}
+
+.empty {
+    margin: auto;
+    color: #6a5d5d;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.sendButton {
+    align-self: flex-end;
+    min-height: 42px;
+    min-width: 150px;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #b11226 0%, #d11f34 100%);
+    color: #ffffff;
+    padding: 0.65rem 1rem;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(177, 18, 38, 0.16);
+}
+
+.sendButton:hover {
+    background: linear-gradient(135deg, #8f1121 0%, #b11226 100%);
+}
+
+.sendButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.feedback {
+    border: 1px solid #ead7da;
+    border-radius: 8px;
+    background: #fff8f8;
+    padding: 0.75rem;
+    color: #7f1020;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 980px) {
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .threadPanel {
+        grid-template-columns: 1fr;
+    }
+
+    .messageStack {
+        max-width: 88%;
+    }
+}
+
+@media (max-width: 640px) {
+    .simplePanel {
+        padding: 0.75rem;
+    }
+
+    .composerActions {
+        align-items: stretch;
+    }
+
+    .attachmentField {
+        min-width: 100%;
+    }
+
+    .sendButton {
+        width: 100%;
+    }
+}

@@ -1,0 +1,299 @@
+/* Ce fichier contient des styles communs a plusieurs tableaux de bord.
+   Il ne change pas la logique metier.
+   Il sert seulement a la mise en forme visuelle de certaines cartes,
+   listes, boutons et blocs d'information. */
+
+.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.pageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.pageTitle {
+    font-size: 1.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.pageDescription {
+    color: var(--text-secondary);
+}
+
+.headerDate {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    background: linear-gradient(145deg, #ffffff 0%, #fffafa 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid #1f1f1f;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.statCard {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: #ffffff;
+    border: 1px solid #1f1f1f;
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.statIcon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.statContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.statLabel {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.statValueContainer {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.statValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #b11226;
+}
+
+.statTrend {
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+}
+
+.trendUp {
+    color: var(--success);
+}
+
+.trendDown {
+    color: var(--danger);
+}
+
+.chartsGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+}
+
+.chartCard {
+    padding: 1.5rem;
+}
+
+.chartTitle {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+}
+
+.chartWrapper {
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .chartsGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Magasinier Specific Styles */
+.movementsList, .alertsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.movementItem {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.movementItem:last-child {
+    border-bottom: none;
+}
+
+.moveIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.moveIn { 
+    background-color: rgba(16, 185, 129, 0.1); 
+    color: var(--success); 
+}
+
+.moveOut { 
+    background-color: rgba(239, 68, 68, 0.1); 
+    color: var(--danger); 
+}
+
+.moveDetails { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.moveHeader { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: baseline; 
+}
+
+.partName { 
+    font-weight: 600; 
+    color: var(--text-primary); 
+    font-size: 0.95rem; 
+}
+
+.moveQty { 
+    font-weight: 700; 
+    font-size: 1rem; 
+}
+
+.positive { color: var(--success); }
+.negative { color: var(--danger); }
+
+.moveMeta { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 0.25rem; 
+}
+
+.moveRef { font-size: 0.75rem; color: var(--text-secondary); }
+.moveDate { font-size: 0.75rem; color: var(--text-secondary); opacity: 0.7; }
+
+.alertItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.875rem 1rem;
+    background: linear-gradient(145deg, #ffffff 0%, #fff5f5 100%);
+    border-radius: 12px;
+    border: 1px solid #1f1f1f;
+}
+
+.alertPartInfo { display: flex; flex-direction: column; }
+.alertPartName { font-weight: 600; color: var(--text-primary); font-size: 0.9rem; }
+.alertPartRef { font-size: 0.75rem; color: var(--text-secondary); }
+.alertStatus { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; width: 120px; }
+.alertStockBar { width: 100%; height: 6px; background: rgba(0, 0, 0, 0.05); border-radius: 3px; overflow: hidden; }
+.alertStockLevel { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+.stockValueText { font-size: 0.75rem; font-weight: 600; }
+.outOfStock { color: var(--danger); }
+.lowStock { color: #f59e0b; }
+
+.viewAllLink {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    color: #b11226;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.viewAllLink:hover {
+    transform: translateX(3px);
+}
+
+.alertCount {
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+    color: var(--text-secondary);
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.quickActions {
+    margin-top: 1rem;
+}
+
+.sectionTitle {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 1rem;
+}
+
+.actionGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.actionBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem;
+    background: linear-gradient(145deg, #ffffff 0%, #fffafa 100%);
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.actionBtn:hover {
+    border-color: #b11226;
+    color: #b11226;
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+    background: #fff1f2;
+}
+
+/* Resume simple :
+   ce fichier regroupe des styles reutilisables des tableaux de bord.
+   Il aide a garder une apparence cohérente dans plusieurs espaces. */

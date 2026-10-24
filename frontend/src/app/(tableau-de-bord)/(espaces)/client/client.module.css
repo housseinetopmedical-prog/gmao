@@ -1,0 +1,614 @@
+.page {
+    /* Organise la page en colonnes verticales avec un espace régulier entre les blocs. */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.heroCard {
+    /* Carte du haut utilisée pour les titres des pages client. */
+    background: linear-gradient(145deg, #ffffff 0%, #fff5f5 100%);
+    border: 1px solid #1f1f1f;
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.heroTitle {
+    /* Taille et poids du grand titre de la page. */
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.heroDesc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.quickActions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.8rem;
+}
+
+.metricCard {
+    background: linear-gradient(145deg, #ffffff 0%, #fffafa 100%);
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    padding: 0.9rem;
+}
+
+.metricLabel {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: none;
+    letter-spacing: 0.03em;
+}
+
+.metricValue {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 0.25rem;
+    color: #b11226;
+}
+
+.contentGrid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 1rem;
+}
+
+.blockCard {
+    background: linear-gradient(145deg, #ffffff 0%, #fffafa 100%);
+    border: 1px solid #1f1f1f;
+    border-radius: 14px;
+    padding: 1rem;
+}
+
+.blockTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0;
+    margin: 0;
+}
+
+.listItem {
+    /* Carte utilisée pour afficher un résultat : résumé, urgence, recommandation ou liste IA. */
+    border: 1px solid #1f1f1f;
+    border-radius: 10px;
+    padding: 0.7rem;
+    background: linear-gradient(145deg, #ffffff 0%, #fffafa 100%);
+}
+
+.listItemTitle {
+    /* Titre court à l'intérieur d'une carte de résultat. */
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.listItemMeta {
+    /* Texte secondaire affiché sous un titre de résultat. */
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+}
+
+.notificationLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    gap: 0.25rem;
+    margin-top: 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #991b1b;
+    text-decoration: none;
+}
+
+.notificationLink:hover {
+    text-decoration: underline;
+}
+
+.statusBadge {
+    /* Badge arrondi utilisé pour montrer un état ou une urgence. */
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.22rem 0.6rem;
+}
+
+.statusInfo {
+    background: #ffe4e6;
+    color: #991b1b;
+}
+
+.statusWarn {
+    /* Couleur jaune/orange pour une attention moyenne. */
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.statusDanger {
+    /* Couleur rouge clair pour une erreur ou une urgence forte. */
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.statusSuccess {
+    /* Couleur verte pour un message de succès. */
+    background: #dcfce7;
+    color: #166534;
+}
+
+.confirmationPage {
+    min-height: calc(100vh - 190px);
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1rem, 2vw, 1.75rem);
+    gap: clamp(1.2rem, 3vh, 1.8rem);
+}
+
+.confirmationCard {
+    width: min(100%, 1420px);
+    min-height: auto;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e7eaee;
+    border-radius: 16px;
+    padding: clamp(1.5rem, 3vw, 2.6rem);
+    box-shadow: 0 22px 55px rgba(15, 23, 42, 0.08);
+}
+
+.confirmationHeader {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+}
+
+.confirmationIcon {
+    width: clamp(58px, 5vw, 72px);
+    height: clamp(58px, 5vw, 72px);
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    color: #047857;
+}
+
+.confirmationMessage {
+    min-width: 0;
+}
+
+.ticketNumberBadge {
+    justify-self: center;
+    min-width: 132px;
+    text-align: center;
+    border-radius: 9px;
+    border: 1px solid #bbf7d0;
+    background: linear-gradient(180deg, #ecfdf5 0%, #dcfce7 100%);
+    color: #047857;
+    font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+    font-weight: 800;
+    padding: 0.62rem 1rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.confirmationActionsCard {
+    width: min(100%, 1420px);
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e7eaee;
+    border-radius: 16px;
+    padding: 1.35rem clamp(1rem, 2vw, 1.6rem);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+}
+
+.confirmationActions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.confirmationActions button {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding-inline: 1.35rem;
+}
+
+.form {
+    /* Grande carte qui contient les formulaires de l'espace client. */
+    background: linear-gradient(145deg, #ffffff 0%, #fffafa 100%);
+    border: 1px solid #1f1f1f;
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formSection {
+    /* Sépare chaque partie du formulaire : matériel, description, qualification IA. */
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.sectionTitle {
+    /* Titre d'une section du formulaire. */
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.fieldGrid2 {
+    /* Grille à deux colonnes pour aligner les champs et les résultats IA. */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+}
+
+.fieldGrid3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.7rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.input,
+.select,
+.textarea {
+    /* Style commun des champs de saisie. */
+    border: 1px solid #1f1f1f;
+    border-radius: 9px;
+    padding: 0.62rem 0.75rem;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.92rem;
+    width: 100%;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    /* Indique visuellement le champ actif. */
+    outline: 2px solid #fecdd3;
+    border-color: #b11226;
+}
+
+.textarea {
+    /* Zone de texte pour écrire la description de la panne. */
+    min-height: 110px;
+    resize: vertical;
+}
+
+.sosGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+}
+
+.sosItem {
+    border: 1px solid #1f1f1f;
+    border-radius: 10px;
+    padding: 0.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    background: linear-gradient(145deg, #ffffff 0%, #fff5f5 100%);
+}
+
+.sosQuestion {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.sosActions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+}
+
+.sosButton {
+    border: 1px solid #1f1f1f;
+    border-radius: 9999px;
+    padding: 0.24rem 0.65rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    background: var(--card-bg);
+}
+
+.sosButtonYesActive {
+    background: #dcfce7;
+    border-color: #bbf7d0;
+    color: #166534;
+}
+
+.sosButtonNoActive {
+    background: #fee2e2;
+    border-color: #fecaca;
+    color: #991b1b;
+}
+
+.helperText {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.ticketCard {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.ticketHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+}
+
+.ticketTitle {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.ticketMetaRow {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.65rem;
+}
+
+.ticketMetaBlock {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.55rem;
+    background: var(--accent-blue);
+}
+
+.metaLabel {
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.metaValue {
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 0.18rem;
+}
+
+.timeline {
+    border-left: 2px solid var(--border-color);
+    margin-left: 0.35rem;
+    padding-left: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.timelineItem {
+    position: relative;
+}
+
+.timelineItem::before {
+    content: "";
+    position: absolute;
+    left: -1.06rem;
+    top: 0.35rem;
+    width: 0.48rem;
+    height: 0.48rem;
+    border-radius: 50%;
+    background: var(--primary-blue);
+}
+
+.timelineLabel {
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.timelineDetail {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.timelineDate {
+    font-size: 0.74rem;
+    color: #94a3b8;
+}
+
+.filters {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0.85rem;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 0.65rem;
+}
+
+.docList {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.docChip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.22rem 0.55rem;
+    background: var(--accent-blue);
+    color: var(--text-primary);
+}
+
+.rowActions {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.empty {
+    border: 1px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.modalBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 110;
+    padding: 1rem;
+}
+
+.modalCard {
+    width: min(560px, 100%);
+    background: var(--card-bg);
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.ratingGrid {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.ratingBtn {
+    border: 0;
+    background: transparent;
+    border-radius: 6px;
+    padding: 0.1rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #d1d5db;
+    line-height: 1;
+}
+
+.ratingBtnActive {
+    background: transparent;
+    color: #fbbc04;
+}
+
+.radioRow {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+.radioLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.88rem;
+}
+
+@media (max-width: 1160px) {
+    .contentGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .ticketMetaRow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 820px) {
+    .fieldGrid2,
+    .fieldGrid3,
+    .sosGrid,
+    .filters,
+    .metricsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .ticketMetaRow {
+        grid-template-columns: 1fr;
+    }
+
+    .ratingGrid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .confirmationHeader {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+    }
+
+    .ticketNumberBadge {
+        width: min(100%, 240px);
+    }
+
+    .confirmationActions {
+        justify-content: stretch;
+    }
+
+    .confirmationActions button {
+        flex: 1 1 100%;
+    }
+}

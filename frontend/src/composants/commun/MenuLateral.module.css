@@ -1,0 +1,79 @@
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--card-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.sidebarHeader {
+    padding: 2rem 1.5rem;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    overflow: hidden;
+}
+
+.sidebarNav {
+    flex: 1;
+    padding: 0 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.navItem:hover {
+    background-color: var(--accent-blue);
+    color: var(--primary-blue);
+}
+
+.navItemActive {
+    background-color: var(--primary-blue);
+    color: white !important;
+}
+
+.sidebarFooter {
+    padding: 1rem 0.75rem 2rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    background: var(--card-bg);
+    margin-top: auto;
+    z-index: 2;
+}
+
+.logoutBtn {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    cursor: pointer;
+}
+
+.logoutBtn:hover {
+    color: var(--danger);
+    background-color: #fee2e2;
+}

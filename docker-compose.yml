@@ -1,0 +1,67 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: gmao_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-gmao_root_password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-gmao_biomed}
+    ports:
+      - "${MYSQL_PORT:-3307}:3306"
+    volumes:
+      - gmao_mysql_data:/var/lib/mysql
+      - ./database/gmao_biomed.sql:/docker-entrypoint-initdb.d/01-gmao_biomed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$${MYSQL_ROOT_PASSWORD}\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  app:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: gmao_app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      NEXT_TELEMETRY_DISABLED: "1"
+      DATABASE_URL: mysql://root:${MYSQL_ROOT_PASSWORD:-gmao_root_password}@db:3306/${MYSQL_DATABASE:-gmao_biomed}
+      AUTH_SESSION_SECRET: ${AUTH_SESSION_SECRET:-topmedical-docker-session-secret-change-me}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      GMAIL_USER: ${GMAIL_USER:-}
+      GMAIL_APP_PASSWORD: ${GMAIL_APP_PASSWORD:-}
+      GMAIL_FROM: ${GMAIL_FROM:-}
+      GMAIL_IMAP_HOST: ${GMAIL_IMAP_HOST:-imap.gmail.com}
+      GMAIL_IMAP_PORT: ${GMAIL_IMAP_PORT:-993}
+      GMAIL_IMAP_SECURE: ${GMAIL_IMAP_SECURE:-true}
+      GMAIL_SMTP_HOST: ${GMAIL_SMTP_HOST:-smtp.gmail.com}
+      GMAIL_SMTP_PORT: ${GMAIL_SMTP_PORT:-465}
+      GMAIL_SMTP_SECURE: ${GMAIL_SMTP_SECURE:-true}
+      NEXT_PUBLIC_GOOGLE_DRIVE_URL: ${NEXT_PUBLIC_GOOGLE_DRIVE_URL:-https://drive.google.com/drive/home}
+      FAX_PROVIDER: ${FAX_PROVIDER:-email_gateway}
+      FAX_GATEWAY_DOMAIN: ${FAX_GATEWAY_DOMAIN:-}
+      FAX_GATEWAY_EMAIL_TO: ${FAX_GATEWAY_EMAIL_TO:-}
+      FAX_REPLY_TO: ${FAX_REPLY_TO:-}
+      FAXPLUS_ACCESS_TOKEN: ${FAXPLUS_ACCESS_TOKEN:-}
+      FAXPLUS_CLIENT_ID: ${FAXPLUS_CLIENT_ID:-}
+      FAXPLUS_USER_ID: ${FAXPLUS_USER_ID:-self}
+      FAXPLUS_FROM_NUMBER: ${FAXPLUS_FROM_NUMBER:-}
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    volumes:
+      - gmao_uploads:/app/public/uploads
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:3000/login').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+volumes:
+  gmao_mysql_data:
+  gmao_uploads:

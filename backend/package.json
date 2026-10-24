@@ -1,0 +1,21 @@
+{
+  "name": "gmao-biomedicale-backend",
+  "private": true,
+  "engines": {
+    "node": ">=20 <23"
+  },
+  "scripts": {
+    "db:pull": "prisma db pull --schema prisma/schema.prisma && npm run db:dump-sql",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev && npm run db:dump-sql",
+    "db:deploy": "prisma migrate deploy && npm run db:dump-sql",
+    "db:seed": "node prisma/seed.js && npm run db:dump-sql",
+    "db:reset-workflow": "node prisma/reset-workflow.js && npm run db:dump-sql",
+    "db:dump-sql": "node prisma/export-sql.js",
+    "db:sync-all": "npm run db:pull && npm run db:generate && npm run db:dump-sql"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.2.1",
+    "prisma": "^6.2.1"
+  }
+}

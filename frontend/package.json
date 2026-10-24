@@ -1,0 +1,57 @@
+{
+    "name": "gmao-biomedicale",
+    "version": "0.1.0",
+    "private": true,
+    "engines": {
+        "node": ">=20 <23"
+    },
+    "scripts": {
+        "dev": "node ./scripts/dev-server.mjs --skip-warmup",
+        "dev:warm": "node ./scripts/dev-server.mjs --warm-all",
+        "dev:clean": "node ./scripts/dev-server.mjs --clean --skip-warmup",
+        "dev:turbo": "next dev --turbopack",
+        "dev:webpack": "node ./scripts/dev-server.mjs --webpack --skip-warmup",
+        "build:fast": "next build --experimental-build-mode compile --turbopack",
+        "start:fast": "next build && next start -p 3000",
+        "build": "prisma generate --schema ./prisma/schema.prisma && next build",
+        "start": "next start",
+        "lint": "eslint .",
+        "db:pull-sync": "npm --prefix ../backend run db:pull && npm run db:sync-schema",
+        "db:sync-schema": "node ./scripts/sync-prisma-schema.js",
+        "db:generate": "npm run db:sync-schema && prisma generate --schema ./prisma/schema.prisma",
+        "db:migrate": "prisma migrate dev --schema ../backend/prisma/schema.prisma",
+        "db:deploy": "prisma migrate deploy --schema ../backend/prisma/schema.prisma",
+        "db:seed": "node ../backend/prisma/seed.js"
+    },
+    "dependencies": {
+        "clsx": "latest",
+        "dotenv": "^17.2.3",
+        "imapflow": "^1.3.3",
+        "jspdf": "^4.2.1",
+        "jspdf-autotable": "^5.0.7",
+        "lucide-react": "latest",
+        "mailparser": "^3.9.8",
+        "next": "latest",
+        "nodemailer": "^8.0.5",
+        "react": "latest",
+        "react-dom": "latest",
+        "recharts": "latest",
+        "tailwind-merge": "latest"
+    },
+    "devDependencies": {
+        "@prisma/client": "^6.2.1",
+        "@types/node": "latest",
+        "@types/nodemailer": "^8.0.0",
+        "@types/react": "latest",
+        "@types/react-dom": "latest",
+        "eslint": "latest",
+        "eslint-config-next": "latest",
+        "prisma": "^6.2.1",
+        "ts-node": "^10.9.2",
+        "typescript": "latest"
+    },
+    "prisma": {
+        "schema": "../backend/prisma/schema.prisma",
+        "seed": "node ../backend/prisma/seed.js"
+    }
+}

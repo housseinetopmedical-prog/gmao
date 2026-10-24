@@ -1,0 +1,821 @@
+﻿.shell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.headerCard {
+    background: linear-gradient(145deg, #ffffff 0%, #fff5f5 100%);
+    border: 1px solid #1f1f1f;
+    border-radius: 16px;
+    padding: 1rem 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111111;
+}
+
+.subtitle {
+    color: #6a5d5d;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+}
+
+.navTabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.45rem;
+    background: #fff;
+    border: 1px solid #1f1f1f;
+    border-radius: 14px;
+    padding: 0.45rem;
+}
+
+.tab {
+    border-radius: 10px;
+    padding: 0.55rem 0.45rem;
+    text-align: center;
+    border: 1px solid transparent;
+    color: #564e4e;
+    font-size: 0.78rem;
+    font-weight: 700;
+    transition: all 0.18s ease;
+}
+
+.tab:hover {
+    border-color: #b11226;
+    color: #991b1b;
+    background: #fff1f2;
+}
+
+.tabActive {
+    background: #c1121f;
+    border-color: #c1121f;
+    color: #fff;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.adminDashboardGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(380px, 0.95fr);
+    gap: 1rem;
+    align-items: start;
+}
+
+.sectionCard {
+    background: linear-gradient(145deg, #ffffff 0%, #fffafa 100%);
+    border: 1px solid #1f1f1f;
+    border-radius: 14px;
+    padding: 0.95rem;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.verificationHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #ffffff 0%, #fff5f5 100%);
+    padding: 0.9rem;
+}
+
+.verificationBadges {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.verificationTitle {
+    margin: 0 0 0.25rem;
+    color: #111111;
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.verificationSection {
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    background: #fff;
+    padding: 0.95rem;
+}
+
+.verificationSectionSoft {
+    background: #fff5f5;
+}
+
+.verificationSectionTitle {
+    margin-bottom: 0.7rem;
+    color: #111111;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.infoGrid {
+    display: grid;
+    gap: 0.7rem;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.infoBox {
+    border: 1px solid #1f1f1f;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #fff5f5 100%);
+    padding: 0.85rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.infoTitle {
+    color: #7f1020;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.45rem;
+}
+
+.infoValue {
+    color: #111111;
+    font-size: 0.98rem;
+    font-weight: 400;
+    line-height: 1.65;
+    white-space: pre-wrap;
+}
+
+.equipmentQuantityList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.equipmentQuantityItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    background: #fff5f5;
+    border: 1px solid #1f1f1f;
+    color: #111111;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.4rem 0.55rem;
+}
+
+.equipmentQuantityItem strong {
+    color: #c1121f;
+    font-size: 0.8rem;
+}
+
+.descriptionBox {
+    border: 1px solid #1f1f1f;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #fff5f5 100%);
+    margin-top: 0.75rem;
+    padding: 0.9rem;
+}
+
+.actionBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    border-top: 1px solid #1f1f1f;
+    padding-top: 0.9rem;
+}
+
+.sectionTitle {
+    /* Titre d'une section dans les pages ADV. */
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 0.7rem;
+}
+
+.metricGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.65rem;
+}
+
+.metricCard {
+    border: 1px solid #1f1f1f;
+    border-radius: 11px;
+    background: linear-gradient(145deg, #ffffff 0%, #fff5f5 100%);
+    padding: 0.75rem;
+}
+
+.metricLabel {
+    font-size: 0.75rem;
+    color: #6a5d5d;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.metricValue {
+    margin-top: 0.22rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #b11226;
+}
+
+.metricCard:nth-child(7) {
+    grid-column: auto;
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.listItem {
+    /* Carte simple utilisée pour afficher une information, une alerte ou un élément de liste. */
+    border: 1px solid #1f1f1f;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #ffffff 0%, #fffafa 100%);
+    padding: 0.7rem;
+}
+
+.dismissWarrantyAlert + span {
+    display: none;
+}
+
+.itemMain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+}
+
+.itemTitle {
+    /* Titre principal dans une carte. */
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #111111;
+}
+
+.itemMeta {
+    /* Texte secondaire sous un titre. */
+    margin-top: 0.15rem;
+    color: #6a5d5d;
+    font-size: 0.78rem;
+}
+
+.statusBadge {
+    /* Badge arrondi utilisé pour les statuts et les anciens tickets similaires. */
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+}
+
+.statusInfo {
+    background: #ffe4e6;
+    color: #991b1b;
+}
+
+.statusWarn {
+    /* Couleur d'avertissement. */
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.statusDanger {
+    /* Couleur d'erreur ou de situation critique. */
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.statusSuccess {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.urgencyLow {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.urgencyMedium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.urgencyHigh {
+    background: #ffedd5;
+    color: #c2410c;
+}
+
+.urgencyCritical {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.tableWrap {
+    overflow-x: auto;
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 980px;
+}
+
+.table th {
+    text-align: left;
+    font-size: 0.72rem;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #ffffff;
+    font-weight: 700;
+    background: #111111;
+    padding: 0.62rem;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+.table td {
+    padding: 0.62rem;
+    border-bottom: 1px solid #d4d4d8;
+    font-size: 0.83rem;
+    vertical-align: top;
+    color: #111827;
+}
+
+.table tbody tr:nth-child(even) {
+    background: #fff5f5;
+}
+
+.table tr:hover td {
+    background: #fff0f0;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.closedTicketsTable {
+    min-width: 1780px;
+    table-layout: fixed;
+}
+
+.closedTicketsTable th {
+    padding: 0.5rem 0.45rem;
+    font-size: 0.68rem;
+}
+
+.closedTicketsTable td {
+    padding: 0.5rem 0.45rem;
+    font-size: 0.79rem;
+    line-height: 1.25;
+    word-break: break-word;
+}
+
+.clientsHeaderRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.6rem;
+}
+
+.clientsHeaderTools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.clientsCountPill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding: 0.22rem 0.6rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    background: #111827;
+    color: #fff;
+    border: 1px solid #111827;
+}
+
+.clientsSearchWrap {
+    min-width: 250px;
+}
+
+.clientsTable {
+    min-width: 980px;
+}
+
+.clientsTable th {
+    background: linear-gradient(145deg, #fff1f2 0%, #ffe4e6 100%);
+    color: #7f1d1d;
+    border-bottom: 1px solid #fecaca;
+}
+
+.clientsRow:hover td {
+    background: #fff7f7;
+}
+
+.clientIdPill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding: 0.22rem 0.52rem;
+    font-size: 0.73rem;
+    font-weight: 700;
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.clientNameStrong {
+    color: #111827;
+    font-weight: 700;
+}
+
+.clientEmailLink {
+    color: #111827;
+    text-decoration: none;
+    border-bottom: 1px dashed #fca5a5;
+}
+
+.clientEmailLink:hover {
+    color: #991b1b;
+    border-bottom-color: #ef4444;
+}
+
+.clientPhoneList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.clientPhoneChip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding: 0.2rem 0.52rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+}
+
+.clientPhoneMobile {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: #fecaca;
+}
+
+.clientPhoneFixed {
+    background: #111827;
+    color: #fff;
+    border-color: #111827;
+}
+
+.clientPhoneGeneric {
+    background: #f3f4f6;
+    color: #111827;
+    border-color: #e5e7eb;
+}
+
+.clientPhoneEmpty {
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.clientDate {
+    color: #111827;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.actions {
+    /* Ligne de boutons, par exemple enregistrer, analyser ou créer. */
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.formGrid2 {
+    /* Grille de formulaire à deux colonnes. */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+}
+
+.formGrid3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.7rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.23rem;
+}
+
+.label {
+    color: #6a5d5d;
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+.input,
+.select,
+.textarea {
+    /* Style commun des champs de formulaire dans l'espace ADV. */
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    padding: 0.56rem 0.68rem;
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: #0f172a;
+    background: #fff;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    /* Mise en évidence du champ actuellement sélectionné. */
+    outline: 2px solid #fecdd3;
+    border-color: #fecdd3;
+}
+
+.textarea {
+    /* Zone de texte plus grande pour écrire des notes ou descriptions. */
+    min-height: 92px;
+    resize: vertical;
+}
+
+.helper {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.empty {
+    border: 1px dashed var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.twoCol {
+    display: grid;
+    grid-template-columns: 1.2fr 0.9fr;
+    gap: 0.85rem;
+}
+
+.threeCol {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.timeline {
+    border-left: 2px solid #ffe4e6;
+    margin-left: 0.25rem;
+    padding-left: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.timelineItem {
+    position: relative;
+    padding: 0.1rem 0 0.1rem 0.25rem;
+}
+
+.timelineItem::before {
+    content: "";
+    position: absolute;
+    left: -1.04rem;
+    top: 0.32rem;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 9999px;
+    background: #c1121f;
+}
+
+.timelineTitle {
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.timelineStatusChange {
+    color: #1d4ed8;
+}
+
+.timelineToneInfo::before {
+    background: #c1121f;
+}
+
+.timelineToneWarning::before {
+    background: #d97706;
+}
+
+.timelineToneSuccess::before {
+    background: #15803d;
+}
+
+.timelineToneDanger::before {
+    background: #b91c1c;
+}
+
+.timelineChip {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 0.22rem;
+    border-radius: 9999px;
+    padding: 0.18rem 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.timelineChipInfo {
+    background: #ffe4e6;
+    color: #991b1b;
+}
+
+.timelineChipWarning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.timelineChipSuccess {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.timelineChipDanger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.timelineMeta {
+    margin-top: 0.12rem;
+    font-size: 0.74rem;
+    color: #64748b;
+}
+
+@media (max-width: 1280px) {
+    .navTabs {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metricGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .metricCard:nth-child(7) {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 1020px) {
+    .adminDashboardGrid,
+    .twoCol,
+    .threeCol,
+    .formGrid2,
+    .formGrid3 {
+        grid-template-columns: 1fr;
+    }
+
+    .clientsSearchWrap {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 760px) {
+    .navTabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .metricGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+.infoCardBody {
+    display: grid;
+    gap: 0.95rem;
+}
+
+.infoLine {
+    display: grid;
+    gap: 0.32rem;
+    padding: 0 0 0.8rem;
+    border-bottom: 1px solid #e8eef5;
+}
+
+.infoLine:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.infoLineLabel {
+    color: #5f7ea3;
+    font-size: 0.73rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.infoLineValue {
+    color: #1e293b;
+    font-size: 0.98rem;
+    font-weight: 400;
+    line-height: 1.65;
+}
+
+.compactRows {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.compactRowCard {
+    border: 1px solid #1f1f1f;
+    border-radius: 10px;
+    background: #fffafa;
+    padding: 0.8rem;
+}
+
+.compactRowHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid #f1d4d8;
+}
+
+.compactRowActions {
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.compactEditGrid,
+.compactReadGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.65rem;
+    margin-top: 0.7rem;
+}
+
+.compactStaticField {
+    border: 1px solid #f1d4d8;
+    border-radius: 9px;
+    background: #fff;
+    padding: 0.55rem 0.65rem;
+    min-height: 58px;
+}
+
+.compactStaticField span {
+    display: block;
+    color: #6a5d5d;
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.compactStaticField strong {
+    color: #111827;
+    font-size: 0.88rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}

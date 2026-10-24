@@ -1,0 +1,623 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model equipment {
+  id              Int                   @id @default(autoincrement())
+  name            String
+  type            String
+  brand           String
+  model           String
+  serialNumber    String                @unique(map: "Equipment_serialNumber_key")
+  location        String
+  status          equipment_status      @default(OPERATIONAL)
+  purchaseDate    DateTime?
+  lastMaintenance DateTime?
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+  client          String?
+  code            String?               @unique(map: "Equipment_code_key")
+  criticality     equipment_criticality @default(LOW)
+  service         String?
+  blDate          DateTime?
+  warrantyMonths  Int?
+  agence          String?
+  blNumber        String?
+  blDocumentUrl   String?
+  invoiceUrl      String?
+  documents       equipment_document[]
+  savHistory      sav_history[]
+  maintenances    maintenance[]
+  tickets         ticket[]
+  piecesUtilisees piece_utilisee[]
+  piecesImportees purchase_order[]
+  piecesLocales   part[]
+  mainOeuvre      main_oeuvre[]
+  misesAJour      mise_a_jour[]
+  installations   nouvelle_installation[]
+  messagesFournisseur messagerie_fournisseur[]
+
+  @@map("materiels")
+}
+
+model sav_history {
+  id          Int       @id @default(autoincrement())
+  equipmentId Int
+  ticketId    Int?
+  action      String
+  note        String?   @db.Text
+  userId      Int
+  createdAt   DateTime  @default(now())
+  equipment   equipment @relation(fields: [equipmentId], references: [id], map: "sav_history_equipmentId_fkey")
+  ticket      ticket?   @relation(fields: [ticketId], references: [id], map: "sav_history_ticketId_fkey")
+  user        user      @relation(fields: [userId], references: [id], map: "sav_history_userId_fkey")
+
+  @@index([equipmentId], map: "sav_history_equipmentId_idx")
+  @@index([ticketId], map: "sav_history_ticketId_idx")
+  @@index([userId], map: "sav_history_userId_idx")
+  @@map("historiques_sav")
+}
+
+model equipment_document {
+  id          Int       @id @default(autoincrement())
+  equipmentId Int
+  name        String
+  type        String
+  url         String
+  uploadedAt  DateTime  @default(now())
+  uploadedBy  Int
+  equipment   equipment @relation(fields: [equipmentId], references: [id], map: "equipment_document_equipmentId_fkey")
+  user        user      @relation(fields: [uploadedBy], references: [id], map: "equipment_document_uploadedBy_fkey")
+
+  @@index([uploadedBy], map: "equipment_document_uploadedBy_fkey")
+  @@index([equipmentId], map: "equipment_document_equipmentId_idx")
+  @@map("documents_materiels")
+}
+
+model historique_marche {
+  id                Int       @id @default(autoincrement())
+  equipmentId       Int?
+  organism          String
+  marketNumber      String
+  lot               String?
+  designation       String
+  brand             String
+  model             String
+  serialNumber      String
+  inventoryNumber   String
+  articleCode       String?
+  hospital          String
+  city              String
+  sector            String
+  contractType      String
+  contractStartDate DateTime?
+  contractEndDate   DateTime?
+  documentUrl       String?   @db.Text
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([equipmentId], map: "historique_marches_equipmentId_idx")
+  @@index([inventoryNumber], map: "historique_marches_inventoryNumber_idx")
+  @@map("historique_marches")
+}
+
+model marche {
+  id                Int       @id @default(autoincrement())
+  equipmentId       Int?
+  organism          String
+  marketNumber      String
+  lot               String?
+  designation       String
+  brand             String
+  model             String
+  serialNumber      String
+  inventoryNumber   String
+  articleCode       String?
+  hospital          String
+  city              String
+  sector            String
+  contractType      String
+  contractStartDate DateTime?
+  contractEndDate   DateTime?
+  documentUrl       String?   @db.Text
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  conversationsInternes ticket_interne[] @relation("conversation_messagerie_marche")
+
+  @@index([equipmentId], map: "marches_equipmentId_idx")
+  @@index([inventoryNumber], map: "marches_inventoryNumber_idx")
+  @@map("marches")
+}
+
+model maintenance {
+  id            Int       @id @default(autoincrement())
+  equipmentId   Int
+  type          String
+  scheduledDate DateTime
+  completedDate DateTime?
+  technicianId  Int
+  notes         String?   @db.Text
+  status        String    @default("PLANNED")
+  createdAt     DateTime  @default(now())
+  equipment     equipment @relation(fields: [equipmentId], references: [id], map: "Maintenance_equipmentId_fkey")
+  user          user      @relation(fields: [technicianId], references: [id], map: "Maintenance_technicianId_fkey")
+
+  @@index([equipmentId], map: "Maintenance_equipmentId_fkey")
+  @@index([technicianId], map: "Maintenance_technicianId_fkey")
+  @@map("maintenances")
+}
+
+model reclamation {
+  id               Int      @id @default(autoincrement())
+  customerName     String
+  contactEmail     String
+  phone            String?
+  serialNumber     String
+  deviceModel      String
+  description      String   @db.Text
+  status           String   @default("PENDING")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  attachmentUrl    String?
+  checklist        String?  @db.LongText
+  interventionType String?
+  satisfactionRate Int?
+  techComment      String?  @db.Text
+  sageCode         String?
+  ticketId         Int?     @unique(map: "demandes_intervention_ticketId_key")
+  ticket           ticket?  @relation(fields: [ticketId], references: [id], map: "demandes_intervention_ticketId_fkey")
+
+  @@map("demandes_intervention")
+}
+
+model ticket {
+  id                    Int              @id @default(autoincrement())
+  title                 String
+  description           String           @db.Text
+  priority              ticket_priority  @default(MEDIUM)
+  status                ticket_status    @default(OPEN)
+  equipmentId           Int
+  creatorId             Int
+  assignedToId          Int?
+  advId                 Int?
+  aiDiagnosis           String?          @db.Text
+  aiSummary             String?          @db.Text
+  aiUrgency             String?          @db.VarChar(20)
+  aiProbableCauses      String?          @db.LongText
+  aiSuggestedParts      String?          @db.LongText
+  aiChecklist           String?          @db.LongText
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+  diagnosis             String?          @db.Text
+  solution              String?          @db.Text
+  isUnderWarranty       Boolean          @default(false)
+  estimatedEndDate      DateTime?
+  estimatedDuration     Int?
+  actualDuration        Int?
+  closedAt              DateTime?
+  contactName           String?
+  contactPhone          String?
+  siteAddress           String?
+  isHandledByTopMedical Boolean?
+  qualificationDate     DateTime?
+  rejectionMotive       String?          @db.Text
+  satisfactionRate      Int?
+  sosChecklist          String?          @db.LongText
+  interventionType      String?          @db.VarChar(50)
+  savHistory            sav_history[]
+  piecesUtilisees       piece_utilisee[]
+  piecesImportees       purchase_order[]
+  purchaseItems         purchase_item[]
+  piecesLocales         part[]
+  mouvementsPieces      stock_movement[]
+  mainOeuvre            main_oeuvre[]
+  misesAJour            mise_a_jour[]
+  installations         nouvelle_installation[]
+  messagesFournisseur   messagerie_fournisseur[]
+  conversationsInternes ticket_interne[]
+  reclamation           reclamation?
+  adv                   user?            @relation("ticket_advIdTouser", fields: [advId], references: [id], map: "Ticket_advId_fkey")
+  assignedTo            user?            @relation("ticket_assignedToIdTouser", fields: [assignedToId], references: [id], map: "Ticket_assignedToId_fkey")
+  creator               user             @relation("ticket_creatorIdTouser", fields: [creatorId], references: [id], map: "Ticket_creatorId_fkey")
+  equipment             equipment        @relation(fields: [equipmentId], references: [id], map: "Ticket_equipmentId_fkey")
+
+  @@index([assignedToId], map: "Ticket_assignedToId_fkey")
+  @@index([creatorId], map: "Ticket_creatorId_fkey")
+  @@index([equipmentId], map: "Ticket_equipmentId_fkey")
+  @@index([advId], map: "Ticket_advId_fkey")
+  @@map("tickets")
+}
+
+model user {
+  id                               Int                      @id @default(autoincrement())
+  email                            String                   @unique(map: "User_email_key")
+  password                         String
+  name                             String
+  role                             user_role                @default(CLIENT)
+  phone                            String?
+  createdAt                        DateTime                 @default(now())
+  updatedAt                        DateTime                 @updatedAt
+  mission                          String?                  @db.Text
+  stats                            String?                  @db.Text
+  piecesImportees                  purchase_order[]
+  uploadedDocuments                equipment_document[]
+  savHistory                       sav_history[]
+  maintenance                      maintenance[]
+  piecesUtilisees                  piece_utilisee[]
+  piecesLocales                    part[]
+  mainOeuvre                       main_oeuvre[]
+  misesAJour                       mise_a_jour[]
+  installations                    nouvelle_installation[]
+  messagesInternes                 message_ticket_interne[] @relation("message_interne_expediteur")
+  messagesFournisseur              messagerie_fournisseur[]
+  movementsReceived                stock_movement[]         @relation("tech_movement")
+  ticket_ticket_advIdTouser        ticket[]                 @relation("ticket_advIdTouser")
+  ticket_ticket_assignedToIdTouser ticket[]                 @relation("ticket_assignedToIdTouser")
+  ticket_ticket_creatorIdTouser    ticket[]                 @relation("ticket_creatorIdTouser")
+  conversationsCrees               ticket_interne[]         @relation("conversation_messagerie_createur")
+  conversationsRecues              ticket_interne[]         @relation("conversation_messagerie_destinataire")
+
+  @@map("utilisateurs")
+}
+
+model purchase_order {
+  id              Int             @id @default(autoincrement())
+  ref             String          @unique(map: "purchase_order_ref_key")
+  supplier        String
+  supplierContact String?
+  sourceType      purchase_source @default(LOCAL)
+  status          purchase_status @default(DEMAND)
+  totalAmount     Float           @default(0)
+  expectedDate    DateTime?
+  receivedDate    DateTime?
+  trackingNumber  String?
+  notes           String?         @db.Text
+  creatorId       Int
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  creator         user            @relation(fields: [creatorId], references: [id], map: "purchase_order_creatorId_fkey")
+  items           purchase_item[]
+  equipmentId     Int?
+  ticketId        Int?
+  equipment       equipment?      @relation(fields: [equipmentId], references: [id], map: "pieces_importees_equipmentId_fkey")
+  ticket          ticket?         @relation(fields: [ticketId], references: [id], map: "pieces_importees_ticketId_fkey")
+
+  @@index([creatorId], map: "purchase_order_creatorId_fkey")
+  @@index([equipmentId], map: "pieces_importees_equipmentId_idx")
+  @@index([ticketId], map: "pieces_importees_ticketId_idx")
+  @@map("pieces_importees")
+}
+
+model purchase_item {
+  id        Int            @id @default(autoincrement())
+  orderId   Int
+  name      String
+  ref       String?
+  qty       Int            @default(1)
+  unitPrice Float          @default(0)
+  ticketId  Int?
+  order     purchase_order @relation(fields: [orderId], references: [id], onDelete: Cascade, map: "purchase_item_orderId_fkey")
+  ticket    ticket?        @relation(fields: [ticketId], references: [id], map: "purchase_item_ticketId_fkey")
+
+  @@index([orderId], map: "purchase_item_orderId_fkey")
+  @@index([ticketId], map: "purchase_item_ticketId_fkey")
+  @@map("details_pieces_importees")
+}
+
+model part {
+  id               Int              @id @default(autoincrement())
+  sageCode         String?          @unique(map: "part_sageCode_key")
+  sageDesignation  String?
+  name             String
+  reference        String           @unique(map: "part_reference_key")
+  description      String?          @db.Text
+  price            Float            @default(0)
+  quantityInStock  Int              @default(0)
+  minStock         Int              @default(5)
+  compatibleModels String?          @db.Text
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  movements        stock_movement[]
+  equipmentId      Int?
+  ticketId         Int?
+  userId           Int?
+  equipment        equipment?       @relation(fields: [equipmentId], references: [id], map: "pieces_locales_equipmentId_fkey")
+  ticket           ticket?          @relation(fields: [ticketId], references: [id], map: "pieces_locales_ticketId_fkey")
+  user             user?            @relation(fields: [userId], references: [id], map: "pieces_locales_userId_fkey")
+
+  @@index([equipmentId], map: "pieces_locales_equipmentId_idx")
+  @@index([ticketId], map: "pieces_locales_ticketId_idx")
+  @@index([userId], map: "pieces_locales_userId_idx")
+  @@map("pieces_locales")
+}
+
+model stock_movement {
+  id           Int              @id @default(autoincrement())
+  partId       Int
+  type         movement_type
+  qty          Int
+  date         DateTime         @default(now())
+  ref          String?
+  userId       Int
+  supplier     String?
+  sourceType   purchase_source?
+  documentUrl  String?
+  ticketId     Int?
+  technicianId Int?
+  fromLocation String?
+  toLocation   String?
+  part         part             @relation(fields: [partId], references: [id], map: "stock_movement_partId_fkey")
+  technician   user?            @relation("tech_movement", fields: [technicianId], references: [id], map: "stock_movement_technicianId_fkey")
+  ticket       ticket?          @relation(fields: [ticketId], references: [id], map: "stock_movement_ticketId_fkey")
+
+  @@index([partId], map: "stock_movement_partId_idx")
+  @@index([technicianId], map: "stock_movement_technicianId_idx")
+  @@index([ticketId], map: "stock_movement_ticketId_idx")
+  @@map("mouvements_pieces_locales")
+}
+
+model piece_utilisee {
+  id               Int        @id @default(autoincrement())
+  ticketId         Int?
+  equipmentId      Int?
+  userId           Int?
+  designation      String
+  quantity         Float      @default(1)
+  supplierCode     String?
+  sageCode         String?
+  costPrice        Float?
+  purchasePrice    Float?
+  purchaseCurrency String?
+  salePriceTtc     Float?
+  usedAt           DateTime   @default(now())
+  commentaire      String?    @db.Text
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @default(now()) @updatedAt
+  ticket           ticket?    @relation(fields: [ticketId], references: [id], map: "pieces_utilisees_ticketId_fkey")
+  equipment        equipment? @relation(fields: [equipmentId], references: [id], map: "pieces_utilisees_equipmentId_fkey")
+  user             user?      @relation(fields: [userId], references: [id], map: "pieces_utilisees_userId_fkey")
+
+  @@index([ticketId], map: "pieces_utilisees_ticketId_idx")
+  @@index([equipmentId], map: "pieces_utilisees_equipmentId_idx")
+  @@index([userId], map: "pieces_utilisees_userId_idx")
+  @@map("pieces_utilisees")
+}
+
+model main_oeuvre {
+  id          Int        @id @default(autoincrement())
+  ticketId    Int?
+  equipmentId Int?
+  userId      Int?
+  designation String
+  heures      Float      @default(0)
+  prixHoraire Float?
+  prixTotal   Float?
+  commentaire String?    @db.Text
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now()) @updatedAt
+  ticket      ticket?    @relation(fields: [ticketId], references: [id], map: "main_oeuvre_ticketId_fkey")
+  equipment   equipment? @relation(fields: [equipmentId], references: [id], map: "main_oeuvre_equipmentId_fkey")
+  user        user?      @relation(fields: [userId], references: [id], map: "main_oeuvre_userId_fkey")
+
+  @@index([ticketId], map: "main_oeuvre_ticketId_idx")
+  @@index([equipmentId], map: "main_oeuvre_equipmentId_idx")
+  @@index([userId], map: "main_oeuvre_userId_idx")
+  @@map("main_oeuvre")
+}
+
+model mise_a_jour {
+  id            Int        @id @default(autoincrement())
+  ticketId      Int?
+  equipmentId   Int?
+  userId        Int?
+  designation   String
+  versionAvant  String?
+  versionApres  String?
+  prix          Float?
+  commentaire   String?    @db.Text
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @default(now()) @updatedAt
+  ticket        ticket?    @relation(fields: [ticketId], references: [id], map: "mises_a_jour_ticketId_fkey")
+  equipment     equipment? @relation(fields: [equipmentId], references: [id], map: "mises_a_jour_equipmentId_fkey")
+  user          user?      @relation(fields: [userId], references: [id], map: "mises_a_jour_userId_fkey")
+
+  @@index([ticketId], map: "mises_a_jour_ticketId_idx")
+  @@index([equipmentId], map: "mises_a_jour_equipmentId_idx")
+  @@index([userId], map: "mises_a_jour_userId_idx")
+  @@map("mises_a_jour")
+}
+
+model nouvelle_installation {
+  id          Int        @id @default(autoincrement())
+  ticketId    Int?
+  equipmentId Int?
+  userId      Int?
+  designation String
+  licence     String?
+  prix        Float?
+  commentaire String?    @db.Text
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now()) @updatedAt
+  ticket      ticket?    @relation(fields: [ticketId], references: [id], map: "nouvelles_installations_ticketId_fkey")
+  equipment   equipment? @relation(fields: [equipmentId], references: [id], map: "nouvelles_installations_equipmentId_fkey")
+  user        user?      @relation(fields: [userId], references: [id], map: "nouvelles_installations_userId_fkey")
+
+  @@index([ticketId], map: "nouvelles_installations_ticketId_idx")
+  @@index([equipmentId], map: "nouvelles_installations_equipmentId_idx")
+  @@index([userId], map: "nouvelles_installations_userId_idx")
+  @@map("nouvelles_installations")
+}
+
+model ticket_interne {
+  id          Int                        @id @default(autoincrement())
+  threadId    String                     @unique(map: "tickets_internes_threadId_key")
+  ticketId    Int?
+  marketId    Int?
+  destination ticket_interne_destination
+  statut      ticket_interne_statut      @default(OPEN)
+  sujet       String
+  createurId  Int
+  recipientId Int?
+  createdAt   DateTime                   @default(now())
+  updatedAt   DateTime                   @updatedAt
+  messages    message_ticket_interne[]
+  createur    user                       @relation("conversation_messagerie_createur", fields: [createurId], references: [id], map: "tickets_internes_createurId_fkey")
+  recipient   user?                      @relation("conversation_messagerie_destinataire", fields: [recipientId], references: [id], map: "tickets_internes_recipientId_fkey")
+  ticket      ticket?                    @relation(fields: [ticketId], references: [id], map: "tickets_internes_ticketId_fkey")
+  market      marche?                    @relation("conversation_messagerie_marche", fields: [marketId], references: [id], map: "tickets_internes_marketId_fkey")
+
+  @@index([ticketId], map: "tickets_internes_ticketId_idx")
+  @@index([marketId], map: "tickets_internes_marketId_idx")
+  @@index([createurId], map: "tickets_internes_createurId_idx")
+  @@index([recipientId], map: "tickets_internes_recipientId_idx")
+  @@index([destination], map: "tickets_internes_destination_idx")
+  @@index([statut], map: "tickets_internes_statut_idx")
+  @@map("conversations_messagerie")
+}
+
+model message_ticket_interne {
+  id              Int                   @id @default(autoincrement())
+  ticketInterneId Int
+  expediteurId    Int
+  type            ticket_interne_type   @default(MESSAGE)
+  message         String                @db.Text
+  statut          ticket_interne_statut
+  pieceJointeUrl  String?
+  pieceJointeNom  String?
+  createdAt       DateTime              @default(now())
+  expediteur      user                  @relation("message_interne_expediteur", fields: [expediteurId], references: [id], map: "messages_tickets_internes_expediteurId_fkey")
+  ticketInterne   ticket_interne        @relation(fields: [ticketInterneId], references: [id], onDelete: Cascade, map: "messages_tickets_internes_ticketInterneId_fkey")
+
+  @@index([ticketInterneId], map: "messages_tickets_internes_ticketInterneId_idx")
+  @@index([expediteurId], map: "messages_tickets_internes_expediteurId_idx")
+  @@index([createdAt], map: "messages_tickets_internes_createdAt_idx")
+  @@map("messagerie")
+}
+
+model messagerie_fournisseur {
+  id                Int                         @id @default(autoincrement())
+  threadId          String
+  ticketId          Int?
+  equipmentId       Int?
+  expediteurId      Int?
+  fournisseur       String?
+  fournisseurEmail  String?
+  sujet             String
+  message           String                      @db.Text
+  direction         supplier_message_direction  @default(OUTBOUND)
+  pieceJointeUrl    String?
+  pieceJointeNom    String?
+  externalMessageId String?
+  createdAt         DateTime                    @default(now())
+  ticket            ticket?                     @relation(fields: [ticketId], references: [id], map: "messagerie_fournisseur_ticketId_fkey")
+  equipment         equipment?                  @relation(fields: [equipmentId], references: [id], map: "messagerie_fournisseur_equipmentId_fkey")
+  expediteur        user?                       @relation(fields: [expediteurId], references: [id], map: "messagerie_fournisseur_expediteurId_fkey")
+
+  @@index([threadId], map: "messagerie_fournisseur_threadId_idx")
+  @@index([ticketId], map: "messagerie_fournisseur_ticketId_idx")
+  @@index([equipmentId], map: "messagerie_fournisseur_equipmentId_idx")
+  @@index([expediteurId], map: "messagerie_fournisseur_expediteurId_idx")
+  @@map("messagerie_fournisseur")
+}
+
+enum ticket_priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum ticket_status {
+  OPEN
+  QUALIFICATION
+  DIAGNOSTIC
+  DECISION
+  PENDING_PARTS
+  REPAIR
+  QUALITY_TEST
+  READY_FOR_DELIVERY
+  CLOSED
+}
+
+enum user_role {
+  ADMIN
+  TECHNICIAN
+  CLIENT
+  ADV
+  MAGASINIER
+  RESPONSABLE_TECHNIQUE
+  RESPONSABLE_FACTURATION
+  RESPONSABLE_APPELS_OFFRE
+  ACHATS
+  IMPORT
+}
+
+enum equipment_status {
+  OPERATIONAL
+  DOWN_AT_CLIENT
+  IN_WORKSHOP
+  ON_LOAN
+  REPLACED
+  RETIRED
+  MAINTENANCE_REQUIRED
+}
+
+enum equipment_criticality {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum purchase_source {
+  LOCAL
+  IMPORT
+  PLATFORM
+  FABRICATION
+}
+
+enum purchase_status {
+  DEMAND
+  QUOTATION
+  ORDERED
+  SHIPPED
+  RECEIVED
+  CHECKED
+  CONSUMED
+}
+
+enum movement_type {
+  RECEPTION
+  SORTIE
+  TRANSFER
+}
+
+enum ticket_interne_destination {
+  ADV
+  MAGASINIER
+  ADMIN
+  TECHNICIAN
+}
+
+enum ticket_interne_statut {
+  OPEN
+  IN_PROGRESS
+  WAITING_REPLY
+  RESOLVED
+}
+
+enum ticket_interne_type {
+  CREATE
+  MESSAGE
+  STATUS
+}
+
+enum supplier_message_direction {
+  OUTBOUND
+  INBOUND
+}

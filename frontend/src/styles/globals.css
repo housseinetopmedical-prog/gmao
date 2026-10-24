@@ -1,0 +1,338 @@
+:root {
+    --font-body: "Segoe UI", Arial, sans-serif;
+    --font-display: "Segoe UI", Arial, sans-serif;
+    --primary-blue: #b11226;
+    --secondary-blue: #7f1020;
+    --accent-blue: #fff4f5;
+    --medical-bg: #f6f1f1;
+    --card-bg: #ffffff;
+    --text-primary: #111111;
+    --text-secondary: #4f4646;
+    --border-color: #e9d5d9;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --surface-muted: #fff8f8;
+    --surface-strong: #1a1a1a;
+    --shadow-soft: 0 18px 40px rgb(127 16 32 / 0.08);
+    --sidebar-width: 260px;
+    color-scheme: light;
+}
+
+[data-theme='dark'] {
+    --primary-blue: #ef4444;
+    --secondary-blue: #fecaca;
+    --accent-blue: #2a1215;
+    --medical-bg: #0a0a0a;
+    --card-bg: #141414;
+    --text-primary: #f5f5f5;
+    --text-secondary: #c1b5b5;
+    --border-color: #3b2327;
+    --surface-muted: #1b1213;
+    --surface-strong: #f8f8f8;
+    --shadow-soft: 0 18px 40px rgb(0 0 0 / 0.32);
+    color-scheme: dark;
+}
+
+[data-theme='dark'] tr:hover td {
+    background-color: #1f1f1f;
+    opacity: 0.8;
+}
+
+[data-theme='dark'] .badge-success {
+    background: #064e3b;
+    color: #34d399;
+}
+
+[data-theme='dark'] .badge-warning {
+    background: #78350f;
+    color: #fbbf24;
+}
+
+[data-theme='dark'] .badge-danger {
+    background: #7f1d1d;
+    color: #f87171;
+}
+
+[data-theme='dark'] .badge-info {
+    background: #450a0a;
+    color: #fca5a5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background:
+        radial-gradient(circle at top left, rgb(177 18 38 / 0.08), transparent 24%),
+        linear-gradient(180deg, var(--surface-muted) 0%, var(--medical-bg) 28%, var(--medical-bg) 100%);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display), var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: inherit;
+}
+
+input,
+textarea,
+select {
+    color: var(--text-primary);
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.95;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+    color: var(--text-secondary);
+    background: var(--accent-blue);
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+/* Common Layout Utilities */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.card {
+    background: linear-gradient(145deg, #ffffff 0%, #fffafa 100%);
+    border: 1px solid #1f1f1f;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+}
+
+.btn {
+    padding: 0.625rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #d11f34 100%);
+    color: white;
+    box-shadow: 0 10px 24px rgb(177 18 38 / 0.18);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background-color: var(--card-bg);
+    border: 1px solid color-mix(in srgb, var(--primary-blue) 18%, var(--border-color));
+    color: var(--text-primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--accent-blue);
+    border-color: var(--primary-blue);
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-danger {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.badge-info {
+    background: #ffe4e6;
+    color: #9f1239;
+}
+
+/* Table Styles */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid #1f1f1f;
+    box-shadow: var(--shadow-soft);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th {
+    background: #111111;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #ffffff;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+td {
+    padding: 1rem;
+    font-size: 0.875rem;
+    border-bottom: 1px solid #d4d4d8;
+}
+
+tbody tr:nth-child(even) td {
+    background: #fff5f5;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: #fff0f0;
+}
+
+/* Dashboard Layout Styles */
+.dashboard-root {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--medical-bg);
+}
+
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    height: 70px;
+    background: color-mix(in srgb, var(--card-bg) 92%, var(--accent-blue));
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+}
+
+.search-input {
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    width: 350px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+.search-input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 4px rgb(177 18 38 / 0.12);
+}
+
+.search-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.user-role {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--surface-strong) 0%, var(--primary-blue) 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.page-container {
+    padding: 2rem;
+    flex: 1;
+}
